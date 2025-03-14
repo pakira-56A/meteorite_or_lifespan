@@ -1,0 +1,7 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore specific files:
+.github/PULL_REQUEST_TEMPLATE.md
+README.md

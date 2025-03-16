@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import "./App.css"
-import WeatherFortune from "./WeatherFortune"
-import RouletteWheel from "./RouletteWheel"
+import WeatherFortune from "./componets/WeatherFortune"
+import RouletteWheel from "./componets/RouletteWheel"
 
 function App() {
   const [isSpinning, setIsSpinning] = useState(false)
@@ -60,7 +60,7 @@ function App() {
     大分: "440000",
     宮崎: "450000",
     鹿児島: "460100",
-    沖縄: "471000", // 那覇
+    沖縄: "471000"
   }
 
   // 地域リスト（表示用）
@@ -108,7 +108,9 @@ function App() {
   const fetchWeatherForecast = async (regionCode, regionName) => {
     try {
       // 気象庁の週間予報XMLデータを取得
-      const response = await fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`)
+      const response = await fetch(
+        `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
+      )
 
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`)
@@ -132,8 +134,10 @@ function App() {
 
       // 地域の天気コードと天気テキストを取得
       const weatherCode =
-        weatherForecast.areas.find((area) => area.area.name === regionName || area.area.code === regionCode)
-          ?.weatherCodes[0] || weatherForecast.areas[0].weatherCodes[0]
+        weatherForecast.areas.find(
+          (area) =>
+            area.area.name === regionName || area.area.code === regionCode
+        )?.weatherCodes[0] || weatherForecast.areas[0].weatherCodes[0]
 
       const weatherText = getWeatherTextFromCode(weatherCode)
 
@@ -143,8 +147,10 @@ function App() {
 
       if (temperatureForecast) {
         const tempArea =
-          temperatureForecast.areas.find((area) => area.area.name === regionName || area.area.code === regionCode) ||
-          temperatureForecast.areas[0]
+          temperatureForecast.areas.find(
+            (area) =>
+              area.area.name === regionName || area.area.code === regionCode
+          ) || temperatureForecast.areas[0]
 
         if (tempArea.temps) {
           // 最高気温と最低気温が別々に格納されている場合
@@ -165,8 +171,8 @@ function App() {
         weatherCode: weatherCode,
         temperature: {
           max: maxTemp,
-          min: minTemp,
-        },
+          min: minTemp
+        }
       }
     } catch (error) {
       console.error("気象庁APIからのデータ取得エラー:", error)
@@ -295,7 +301,7 @@ function App() {
       425: "雪一時強く降る",
       426: "雪のちみぞれ",
       427: "みぞれのち雪",
-      450: "雪で雷を伴う",
+      450: "雪で雷を伴う"
     }
 
     return weatherCodes[code] || "不明"
@@ -306,25 +312,43 @@ function App() {
       <header>
         <h1>能天気予報ルーレット</h1>
         <div className="character-container">
-          <img src="/image/お天気お姉さん.png" alt="お天気お姉さん" className="character-image" />
+          <img
+            src="/images/お天気お姉さん.png"
+            alt="お天気お姉さん"
+            className="character-image"
+          />
         </div>
       </header>
 
       <main>
         <div className="roulette-container">
-          <RouletteWheel regions={regions} isSpinning={isSpinning} selectedRegion={selectedRegion} />
+          <RouletteWheel
+            regions={regions}
+            isSpinning={isSpinning}
+            selectedRegion={selectedRegion}
+          />
         </div>
 
         <div className="controls">
-          <button onClick={startRoulette} disabled={isSpinning || isLoading} className="control-button start-button">
+          <button
+            onClick={startRoulette}
+            disabled={isSpinning || isLoading}
+            className="control-button start-button"
+          >
             スタート
           </button>
-          <button onClick={stopRoulette} disabled={!isSpinning || isLoading} className="control-button stop-button">
+          <button
+            onClick={stopRoulette}
+            disabled={!isSpinning || isLoading}
+            className="control-button stop-button"
+          >
             ストップ
           </button>
         </div>
 
-        {isLoading && <div className="loading">気象庁APIからデータを取得中...</div>}
+        {isLoading && (
+          <div className="loading">気象庁APIからデータを取得中...</div>
+        )}
 
         {error && <div className="error-message">{error}</div>}
 
@@ -333,7 +357,9 @@ function App() {
 
       <footer>
         <p>※このアプリは気象庁の天気予報データを使用しています。</p>
-        <p>※おみくじ結果はエンターテイメント目的であり、実際の運勢を保証するものではありません。</p>
+        <p>
+          ※おみくじ結果はエンターテイメント目的であり、実際の運勢を保証するものではありません。
+        </p>
       </footer>
     </div>
   )

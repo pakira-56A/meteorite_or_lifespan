@@ -1,8 +1,10 @@
+body {
+  background-color: #fffff6;
+}
+
 .app-container {
   max-width: 420px;
   margin: 0 auto;
-  padding: 10px;
-  font-family: "Hiragino Kaku Gothic Pro", "メイリオ", sans-serif;
   text-align: center;
 }
 
@@ -25,6 +27,7 @@
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 130, 0, 0.3);
 }
 
 .start-button {
@@ -63,10 +66,4 @@
   background-color: #ffebee;
   padding: 10px;
   border-radius: 5px;
-}
-
-footer {
-  margin-top: 20px;
-  color: gray;
-  font-size: 0.7rem;
 }

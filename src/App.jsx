@@ -308,14 +308,38 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1 style={{ color: "blue", marginTop: "0px", marginBottom: "10px" }}>
-        お天気おみくじ
-      </h1>
-      <img
-        src="/images/お天気お姉さん.png"
-        alt="お天気お姉さん"
-        style={{ width: "120px" }}
-      />
+      <h2
+        style={{
+          color: "blue",
+          marginTop: "0px",
+          backgroundColor: "#FFFFAA",
+          borderRadius: "10px"
+        }}
+      >
+        お天気ルーレットおみくじ
+      </h2>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <img
+          src="/images/お天気お姉さん.png"
+          alt="お天気お姉さん"
+          style={{ width: "120px" }}
+        />
+        <img
+          src="/images/おみくじ.png"
+          alt="おみくじ"
+          style={{ width: "90px", marginLeft: "30px" }}
+        />
+      </div>
+      <div style={{ color: "#0088ff", margin: "20px 0px" }}>
+        気象庁の天気予報データを使っておみくじ！
+      </div>
 
       <main>
         <div className="roulette-container">
@@ -351,11 +375,6 @@ function App() {
 
         {weatherData && <WeatherFortune weatherData={weatherData} />}
       </main>
-
-      <footer>
-        <p>このアプリは気象庁さんの天気予報データを使ってるよ！</p>
-        <p>おみくじ結果は、実際の運勢を保証できないよ！</p>
-      </footer>
     </div>
   )
 }

@@ -37,16 +37,23 @@
   object-fit: contain;
 }
 
-.transition-image {
+.combined-image {
   width: 80px;
   height: 80px;
 }
 
-.weather-arrow {
+.weather-symbol {
   margin: 0 10px;
   font-size: 1.5rem;
-  color: #4a6fa5;
   font-weight: bold;
+}
+
+.weather-symbol:contains("→") {
+  color: #4a6fa5;
+}
+
+.weather-symbol:contains("+") {
+  color: #e74c3c;
 }
 
 .fortune-clovers {
@@ -104,4 +111,3 @@
   display: flex;
   justify-content: center;
 }
-

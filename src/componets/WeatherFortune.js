@@ -4,79 +4,98 @@ function WeatherFortune({ weatherData }) {
   // 天気に基づいておみくじ結果を生成
   const getFortuneResult = (weather) => {
     // 天気パターンに基づいておみくじ結果を決定
-    if (weather.includes("晴れ") && !weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪")) {
+    if (
+      weather.includes("晴れ") &&
+      !weather.includes("曇り") &&
+      !weather.includes("雨") &&
+      !weather.includes("雪")
+    ) {
       return {
         result: weather,
-        imagePath: "/image/晴れ.png",
-        message: "太陽のように明るく輝く一日になりそうです！新しいことに挑戦するのに最適な日です。",
-        luck: 5,
+        imagePath: "/images/晴れ.png",
+        message:
+          "太陽のように明るく輝く一日になりそうです！新しいことに挑戦するのに最適な日です。",
+        luck: 5
       }
     } else if (weather.includes("晴れ") && weather.includes("曇り")) {
       return {
         result: weather,
-        imagePath: "/image/曇り.png",
-        message: "時々雲が出ても、あなたの前向きな気持ちが晴れ間を作り出します。チャンスを見逃さないでください！",
-        luck: 4,
+        imagePath: "/images/曇り.png",
+        message:
+          "時々雲が出ても、あなたの前向きな気持ちが晴れ間を作り出します。チャンスを見逃さないでください！",
+        luck: 4
       }
-    } else if (weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪")) {
+    } else if (
+      weather.includes("曇り") &&
+      !weather.includes("雨") &&
+      !weather.includes("雪")
+    ) {
       return {
         result: weather,
-        imagePath: "/image/曇り.png",
-        message: "雲の向こうには必ず太陽があります。今日は内省と計画を立てるのに良い日です。明日への準備をしましょう。",
-        luck: 3,
+        imagePath: "/images/曇り.png",
+        message:
+          "雲の向こうには必ず太陽があります。今日は内省と計画を立てるのに良い日です。明日への準備をしましょう。",
+        luck: 3
       }
     } else if (weather.includes("雨") && weather.includes("曇り")) {
       return {
         result: weather,
-        imagePath: "/image/曇りと雨.png",
-        message: "雨は新しい成長の始まり。今日の雨が明日の花を咲かせます。室内でのクリエイティブな活動に最適です。",
-        luck: 3,
+        imagePath: "/images/曇りと雨.png",
+        message:
+          "雨は新しい成長の始まり。今日の雨が明日の花を咲かせます。室内でのクリエイティブな活動に最適です。",
+        luck: 3
       }
     } else if (weather.includes("雨") && !weather.includes("雷")) {
       return {
         result: weather,
-        imagePath: "/image/雨.png",
-        message: "雨は新しい成長の始まり。今日の雨が明日の花を咲かせます。室内でのクリエイティブな活動に最適です。",
-        luck: 3,
+        imagePath: "/images/雨.png",
+        message:
+          "雨は新しい成長の始まり。今日の雨が明日の花を咲かせます。室内でのクリエイティブな活動に最適です。",
+        luck: 3
       }
-    } else if (weather.includes("雪") && (weather.includes("強い") || weather.includes("暴風"))) {
+    } else if (
+      weather.includes("雪") &&
+      (weather.includes("強い") || weather.includes("暴風"))
+    ) {
       return {
         result: weather,
-        imagePath: "/image/吹雪.png",
-        message: "吹雪の中にも静けさがあります。今日は家でゆっくり過ごし、内なる声に耳を傾けましょう。",
-        luck: 2,
+        imagePath: "/images/吹雪.png",
+        message:
+          "吹雪の中にも静けさがあります。今日は家でゆっくり過ごし、内なる声に耳を傾けましょう。",
+        luck: 2
       }
     } else if (weather.includes("雪")) {
       return {
         result: weather,
-        imagePath: "/image/雪.png",
+        imagePath: "/images/雪.png",
         message:
           "雪のように純粋な心で物事に取り組めば、美しい結晶のような成果が得られるでしょう。静かな時間を大切にしてください。",
-        luck: 2,
+        luck: 2
       }
     } else if (weather.includes("霧")) {
       return {
         result: weather,
-        imagePath: "/image/霧.png",
-        message: "霧の中にも道はあります。一歩一歩慎重に進めば、やがて視界が開けてきます。直感を信じて行動しましょう。",
-        luck: 2,
+        imagePath: "/images/霧.png",
+        message:
+          "霧の中にも道はあります。一歩一歩慎重に進めば、やがて視界が開けてきます。直感を信じて行動しましょう。",
+        luck: 2
       }
     } else if (weather.includes("雷")) {
       return {
         result: weather,
-        imagePath: "/image/雷.png",
+        imagePath: "/images/雷.png",
         message:
           "雷の力強いエネルギーがあなたの中の眠っていた情熱を呼び覚ますでしょう。大胆な決断が実を結ぶ日かもしれません。",
-        luck: 1,
+        luck: 1
       }
     } else {
       // デフォルトの場合は曇りの画像を使用
       return {
         result: weather,
-        imagePath: "/image/曇り.png",
+        imagePath: "/images/曇り.png",
         message:
           "天気が変わるように、運命も常に動いています。柔軟な心で一日を過ごせば、思わぬ幸運に出会えるかもしれません。",
-        luck: 3,
+        luck: 3
       }
     }
   }
@@ -89,45 +108,79 @@ function WeatherFortune({ weatherData }) {
       !weatherText.includes("雨") &&
       !weatherText.includes("雪")
     ) {
-      return "/image/晴れ.png"
+      return "/images/晴れ.png"
     } else if (weatherText.includes("曇り") && weatherText.includes("晴れ")) {
-      return "/image/曇り.png"
-    } else if (weatherText.includes("曇り") && !weatherText.includes("雨") && !weatherText.includes("雪")) {
-      return "/image/曇り.png"
+      return "/images/曇り.png"
+    } else if (
+      weatherText.includes("曇り") &&
+      !weatherText.includes("雨") &&
+      !weatherText.includes("雪")
+    ) {
+      return "/images/曇り.png"
     } else if (weatherText.includes("雨") && weatherText.includes("曇り")) {
-      return "/image/曇りと雨.png"
+      return "/images/曇りと雨.png"
     } else if (weatherText.includes("雨") && !weatherText.includes("雷")) {
-      return "/image/雨.png"
-    } else if (weatherText.includes("雪") && (weatherText.includes("強い") || weatherText.includes("暴風"))) {
-      return "/image/吹雪.png"
+      return "/images/雨.png"
+    } else if (
+      weatherText.includes("雪") &&
+      (weatherText.includes("強い") || weatherText.includes("暴風"))
+    ) {
+      return "/images/吹雪.png"
     } else if (weatherText.includes("雪")) {
-      return "/image/雪.png"
+      return "/images/雪.png"
     } else if (weatherText.includes("霧")) {
-      return "/image/霧.png"
+      return "/images/霧.png"
     } else if (weatherText.includes("雷")) {
-      return "/image/雷.png"
+      return "/images/雷.png"
     } else {
-      return "/image/曇り.png"
+      return "/images/曇り.png"
     }
   }
 
-  // 「のち」を含む天気かどうかをチェックし、画像パスを取得
+  // 特定の天気キーワードを抽出する関数
+  const extractWeatherKeyword = (text) => {
+    const keywords = ["晴れ", "曇り", "雨", "雪", "霧", "雷", "吹雪"]
+    for (const keyword of keywords) {
+      if (text.includes(keyword)) {
+        return keyword
+      }
+    }
+    return "曇り" // デフォルト
+  }
+
+  // 天気の表示タイプを判定し、画像パスを取得
   const getWeatherImages = (weather) => {
     if (weather.includes("のち")) {
       // 「のち」で分割して前後の天気を取得
       const [firstWeather, secondWeather] = weather.split("のち")
       return {
-        hasTransition: true,
+        type: "transition",
+        symbol: "→",
         firstImagePath: getWeatherImagePath(firstWeather),
         secondImagePath: getWeatherImagePath(secondWeather),
         firstWeather,
-        secondWeather,
+        secondWeather
+      }
+    } else if (weather.includes("を伴う")) {
+      // 「を伴う」を含む場合（例：雨で雷を伴う）
+      const mainWeather = extractWeatherKeyword(weather.split("で")[0])
+      const accompanyingWeather = extractWeatherKeyword(
+        weather.split("を伴う")[0].split("で")[1] || weather
+      )
+
+      return {
+        type: "accompanying",
+        symbol: "+",
+        firstImagePath: getWeatherImagePath(mainWeather),
+        secondImagePath: getWeatherImagePath(accompanyingWeather),
+        firstWeather: mainWeather,
+        secondWeather: accompanyingWeather
       }
     } else {
-      // 「のち」を含まない場合は単一の画像
+      // 単一の天気の場合
       return {
-        hasTransition: false,
-        imagePath: getWeatherImagePath(weather),
+        type: "single",
+        imagePath: getWeatherImagePath(weather)
       }
     }
   }
@@ -136,8 +189,10 @@ function WeatherFortune({ weatherData }) {
   const weatherImages = getWeatherImages(weatherData.weather)
 
   console.log(`おみくじ結果: ${fortune.result} (天気: ${weatherData.weather})`)
-  if (weatherImages.hasTransition) {
-    console.log(`天気の変化: ${weatherImages.firstWeather} → ${weatherImages.secondWeather}`)
+  if (weatherImages.type !== "single") {
+    console.log(
+      `天気の表示タイプ: ${weatherImages.type}, ${weatherImages.firstWeather} ${weatherImages.symbol} ${weatherImages.secondWeather}`
+    )
   }
 
   // 運勢に応じたクローバーの数を表示
@@ -170,7 +225,6 @@ function WeatherFortune({ weatherData }) {
 
   return (
     <div className="weather-fortune">
-      <h2>能天気おみくじ</h2>
 
       <div className="fortune-card">
         <div className="fortune-header">
@@ -187,40 +241,46 @@ function WeatherFortune({ weatherData }) {
 
         <div className="fortune-result">
           <div className="weather-image-container">
-            {weatherImages.hasTransition ? (
-              // 「のち」を含む場合は2つの画像を表示
+            {weatherImages.type !== "single" ? (
+              // 複合的な天気の場合（遷移または伴う）
               <>
                 <img
                   src={weatherImages.firstImagePath || "/placeholder.svg"}
                   alt={weatherImages.firstWeather}
-                  className="weather-image transition-image"
+                  className="weather-image combined-image"
                   onError={(e) => {
-                    console.error(`画像の読み込みに失敗しました: ${weatherImages.firstImagePath}`)
-                    e.target.src = "/image/曇り.png"
+                    console.error(
+                      `画像の読み込みに失敗しました: ${weatherImages.firstImagePath}`
+                    )
+                    e.target.src = "/images/曇り.png"
                     e.target.alt = "画像が見つかりません"
                   }}
                 />
-                <span className="weather-arrow">→</span>
+                <span className="weather-symbol">{weatherImages.symbol}</span>
                 <img
                   src={weatherImages.secondImagePath || "/placeholder.svg"}
                   alt={weatherImages.secondWeather}
-                  className="weather-image transition-image"
+                  className="weather-image combined-image"
                   onError={(e) => {
-                    console.error(`画像の読み込みに失敗しました: ${weatherImages.secondImagePath}`)
-                    e.target.src = "/image/曇り.png"
+                    console.error(
+                      `画像の読み込みに失敗しました: ${weatherImages.secondImagePath}`
+                    )
+                    e.target.src = "/images/曇り.png"
                     e.target.alt = "画像が見つかりません"
                   }}
                 />
               </>
             ) : (
-              // 単一の天気の場合は1つの画像を表示
+              // 単一の天気の場合
               <img
                 src={weatherImages.imagePath || fortune.imagePath}
                 alt={fortune.result}
                 className="weather-image"
                 onError={(e) => {
-                  console.error(`画像の読み込みに失敗しました: ${weatherImages.imagePath || fortune.imagePath}`)
-                  e.target.src = "/image/曇り.png"
+                  console.error(
+                    `画像の読み込みに失敗しました: ${weatherImages.imagePath || fortune.imagePath}`
+                  )
+                  e.target.src = "/images/曇り.png"
                   e.target.alt = "画像が見つかりません"
                 }}
               />
@@ -235,19 +295,25 @@ function WeatherFortune({ weatherData }) {
           <div className="fortune-item">
             <span className="fortune-label">空気おいしい度</span>
             <div className="fortune-value">
-              {renderClovers(Math.max(1, Math.floor(Math.random() * fortune.luck + 1)))}
+              {renderClovers(
+                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
+              )}
             </div>
           </div>
           <div className="fortune-item">
             <span className="fortune-label">気分ルンルン度</span>
             <div className="fortune-value">
-              {renderClovers(Math.max(1, Math.floor(Math.random() * fortune.luck + 1)))}
+              {renderClovers(
+                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
+              )}
             </div>
           </div>
           <div className="fortune-item">
             <span className="fortune-label">お散歩日和度</span>
             <div className="fortune-value">
-              {renderClovers(Math.max(1, Math.floor(Math.random() * fortune.luck + 1)))}
+              {renderClovers(
+                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
+              )}
             </div>
           </div>
         </div>
@@ -257,4 +323,3 @@ function WeatherFortune({ weatherData }) {
 }
 
 export default WeatherFortune
-

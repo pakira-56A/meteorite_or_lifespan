@@ -2,7 +2,7 @@ import { useState } from "react"
 import { TwitterShareButton } from "react-share"
 
 export const XShareButton = ({ weatherData, fortune }) => {
-  const shareText = `\n \n ${weatherData.region}のお天気、ラッキー度${fortune.luck}🍀\n #お天気ルーレットおみくじ\n `
+  const shareText = `\n \n ${weatherData.region}のお天気、ラッキー度：${fortune.luck}🍀\n #お天気ルーレットおみくじ\n `
   const [isHovered, setIsHovered] = useState(false)
 
   return (

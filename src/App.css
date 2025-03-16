@@ -28,22 +28,22 @@
 }
 
 .start-button {
-  background-color: #5ed262;
+  background-color: rgb(1, 170, 1);
   color: white;
 }
 
 .start-button:hover:not(:disabled) {
-  background-color: green;
+  background-color: lightgreen;
   transform: scale(1.09);
 }
 
 .stop-button {
-  background-color: lightcoral;
+  background-color: coral;
   color: white;
 }
 
 .stop-button:hover:not(:disabled) {
-  background-color: red;
+  background-color: lightpink;
   transform: scale(1.09);
 }
 
@@ -53,7 +53,7 @@
 }
 
 .loading {
-  margin: 20px 0;
+  margin: 40px 0;
   color: blue;
 }
 

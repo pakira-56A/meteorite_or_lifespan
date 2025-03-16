@@ -7,28 +7,23 @@
 .fortune-card {
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 4px 15px rgba(250, 160, 0, 0.3);
+  padding: 15px;
   text-align: center;
 }
 
 .fortune-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.fortune-result {
-  margin: 20px 0;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  color: green;
 }
 
 .weather-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .weather-image {
@@ -58,7 +53,6 @@
 
 .fortune-clovers {
   font-size: 1.5rem;
-  margin: 10px 0;
   letter-spacing: 2px;
   display: flex;
   justify-content: center;
@@ -79,19 +73,20 @@
 }
 
 .fortune-message {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 20px 0;
+  margin: 0px;
+  margin-bottom: 10px;
+  color: rgb(1, 170, 1);
+  font-weight: bold;
+  line-height: 1.5;
   padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: #ffffee;
+  border-radius: 10px;
 }
 
 .fortune-details {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-top: 20px;
 }
 
 .fortune-item {
@@ -101,13 +96,12 @@
 }
 
 .fortune-label {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 5px;
+  font-size: 0.7rem;
+  color: green;
 }
 
 .fortune-value {
-  font-size: 1rem;
+  font-size: 0.9rem;
   display: flex;
   justify-content: center;
 }

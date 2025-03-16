@@ -308,12 +308,14 @@ function App() {
 
   return (
     <div className="app-container">
-        <h1 style={{color:"blue", marginTop: "0px",marginBottom: "10px"}}>お天気おみくじ</h1>
-          <img
-            src="/images/お天気お姉さん.png"
-            alt="お天気お姉さん"
-            style={{width: "120px"}}
-          />
+      <h1 style={{ color: "blue", marginTop: "0px", marginBottom: "10px" }}>
+        お天気おみくじ
+      </h1>
+      <img
+        src="/images/お天気お姉さん.png"
+        alt="お天気お姉さん"
+        style={{ width: "120px" }}
+      />
 
       <main>
         <div className="roulette-container">
@@ -352,13 +354,10 @@ function App() {
 
       <footer>
         <p>このアプリは気象庁さんの天気予報データを使ってるよ！</p>
-        <p>
-          おみくじ結果は、実際の運勢を保証できないよ！
-        </p>
+        <p>おみくじ結果は、実際の運勢を保証できないよ！</p>
       </footer>
     </div>
   )
 }
 
 export default App
-

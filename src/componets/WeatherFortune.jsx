@@ -225,18 +225,16 @@ function WeatherFortune({ weatherData }) {
 
   return (
     <div className="weather-fortune">
-
       <div className="fortune-card">
         <div className="fortune-header">
           <span className="region-date">
             {formatDate(weatherData.date)} {weatherData.region}
           </span>
-            {weatherData.weather}
-            {weatherData.temperature.max && weatherData.temperature.min
-              ? ` ${weatherData.temperature.max}℃〜${weatherData.temperature.min}℃`
-              : ""}
+          {weatherData.weather}
+          {weatherData.temperature.max && weatherData.temperature.min
+            ? ` ${weatherData.temperature.max}℃〜${weatherData.temperature.min}℃`
+            : ""}
         </div>
-
 
         <div className="weather-image-container">
           {weatherImages.type !== "single" ? (
@@ -284,11 +282,10 @@ function WeatherFortune({ weatherData }) {
             />
           )}
         </div>
-        <span style={{color: "green"}}>ラッキー度</span>
+        <span style={{ color: "green" }}>ラッキー度</span>
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
 
         <p className="fortune-message">{fortune.message}</p>
-
       </div>
     </div>
   )

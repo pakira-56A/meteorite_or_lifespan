@@ -1,17 +1,18 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./RouletteWheel.css"
 
 function RouletteWheel({ regions, isSpinning, selectedRegion }) {
   const rouletteRef = useRef(null)
   const animationRef = useRef(null)
-  const currentIndexRef = useRef(0)
+  const [displayedRegion, setDisplayedRegion] = useState(regions[0]) // 表示される地域をstateで管理
 
   // ルーレットのアニメーション
   useEffect(() => {
     if (isSpinning) {
       let startTime
+      let currentIndex = 0 // ローカル変数としてcurrentIndexを定義
 
       const animate = (timestamp) => {
         if (!startTime) startTime = timestamp
@@ -22,13 +23,8 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
 
         if (elapsed % speed < 16) {
           // 16msは約60FPSに相当
-          currentIndexRef.current =
-            (currentIndexRef.current + 1) % regions.length
-
-          if (rouletteRef.current) {
-            // 現在の地域を表示
-            rouletteRef.current.textContent = regions[currentIndexRef.current]
-          }
+          currentIndex = (currentIndex + 1) % regions.length
+          setDisplayedRegion(regions[currentIndex]) // 表示される地域を更新
         }
 
         animationRef.current = requestAnimationFrame(animate)
@@ -42,8 +38,11 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
           cancelAnimationFrame(animationRef.current)
         }
       }
+    } else if (selectedRegion) {
+      // selectedRegionが設定されたら、その地域を表示
+      setDisplayedRegion(selectedRegion)
     }
-  }, [isSpinning, regions])
+  }, [isSpinning, regions, selectedRegion])
 
   // 選択された地域が変更されたとき
   useEffect(() => {
@@ -55,7 +54,7 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
   return (
     <div className="roulette-wheel">
       <div className="roulette-display" ref={rouletteRef}>
-        {selectedRegion || regions[0]}
+        {displayedRegion}
       </div>
     </div>
   )

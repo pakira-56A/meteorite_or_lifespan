@@ -1,0 +1,113 @@
+.weather-fortune {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.fortune-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.fortune-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.fortune-result {
+  margin: 20px 0;
+}
+
+.weather-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weather-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.combined-image {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-symbol {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.weather-symbol:contains("→") {
+  color: #4a6fa5;
+}
+
+.weather-symbol:contains("+") {
+  color: #e74c3c;
+}
+
+.fortune-clovers {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.clover {
+  margin: 0 2px;
+}
+
+.clover.filled {
+  color: #4caf50;
+  opacity: 1;
+}
+
+.clover.empty {
+  color: #4caf50;
+  opacity: 0.3;
+}
+
+.fortune-message {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.fortune-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fortune-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fortune-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.fortune-value {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}

@@ -220,7 +220,7 @@ function WeatherFortune({ weatherData }) {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
-    return `${year}年${month}月${day}日`
+    return `${year}/${month}/${day}`
   }
 
   return (
@@ -229,94 +229,66 @@ function WeatherFortune({ weatherData }) {
       <div className="fortune-card">
         <div className="fortune-header">
           <span className="region-date">
-            {weatherData.region} - {formatDate(weatherData.date)}
+            {formatDate(weatherData.date)} {weatherData.region}
           </span>
-          <span className="weather-info">
             {weatherData.weather}
             {weatherData.temperature.max && weatherData.temperature.min
-              ? ` ${weatherData.temperature.max}℃/${weatherData.temperature.min}℃`
+              ? ` ${weatherData.temperature.max}℃〜${weatherData.temperature.min}℃`
               : ""}
-          </span>
         </div>
 
-        <div className="fortune-result">
-          <div className="weather-image-container">
-            {weatherImages.type !== "single" ? (
-              // 複合的な天気の場合（遷移または伴う）
-              <>
-                <img
-                  src={weatherImages.firstImagePath || "/placeholder.svg"}
-                  alt={weatherImages.firstWeather}
-                  className="weather-image combined-image"
-                  onError={(e) => {
-                    console.error(
-                      `画像の読み込みに失敗しました: ${weatherImages.firstImagePath}`
-                    )
-                    e.target.src = "/images/曇り.png"
-                    e.target.alt = "画像が見つかりません"
-                  }}
-                />
-                <span className="weather-symbol">{weatherImages.symbol}</span>
-                <img
-                  src={weatherImages.secondImagePath || "/placeholder.svg"}
-                  alt={weatherImages.secondWeather}
-                  className="weather-image combined-image"
-                  onError={(e) => {
-                    console.error(
-                      `画像の読み込みに失敗しました: ${weatherImages.secondImagePath}`
-                    )
-                    e.target.src = "/images/曇り.png"
-                    e.target.alt = "画像が見つかりません"
-                  }}
-                />
-              </>
-            ) : (
-              // 単一の天気の場合
+
+        <div className="weather-image-container">
+          {weatherImages.type !== "single" ? (
+            // 複合的な天気の場合（遷移または伴う）
+            <>
               <img
-                src={weatherImages.imagePath || fortune.imagePath}
-                alt={fortune.result}
-                className="weather-image"
+                src={weatherImages.firstImagePath || "/placeholder.svg"}
+                alt={weatherImages.firstWeather}
+                className="weather-image combined-image"
                 onError={(e) => {
                   console.error(
-                    `画像の読み込みに失敗しました: ${weatherImages.imagePath || fortune.imagePath}`
+                    `画像の読み込みに失敗: ${weatherImages.firstImagePath}`
                   )
                   e.target.src = "/images/曇り.png"
-                  e.target.alt = "画像が見つかりません"
+                  e.target.alt = "画像が見つかんない！"
                 }}
               />
-            )}
-          </div>
-          <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
+              <span className="weather-symbol">{weatherImages.symbol}</span>
+              <img
+                src={weatherImages.secondImagePath || "/placeholder.svg"}
+                alt={weatherImages.secondWeather}
+                className="weather-image combined-image"
+                onError={(e) => {
+                  console.error(
+                    `画像の読み込みに失敗: ${weatherImages.secondImagePath}`
+                  )
+                  e.target.src = "/images/曇り.png"
+                  e.target.alt = "画像が見つかんない！"
+                }}
+              />
+            </>
+          ) : (
+            // 単一の天気の場合
+            <img
+              src={weatherImages.imagePath || fortune.imagePath}
+              alt={fortune.result}
+              className="weather-image"
+              onError={(e) => {
+                console.error(
+                  `画像の読み込みに失敗: ${weatherImages.imagePath || fortune.imagePath}`
+                )
+                e.target.src = "/images/曇り.png"
+                e.target.alt = "画像が見つかんない！"
+              }}
+            />
+          )}
         </div>
+        <span style={{color: "green"}}>ラッキー度</span>
+        <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
 
         <p className="fortune-message">{fortune.message}</p>
 
-        <div className="fortune-details">
-          <div className="fortune-item">
-            <span className="fortune-label">空気おいしい度</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-          <div className="fortune-item">
-            <span className="fortune-label">気分ルンルン度</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-          <div className="fortune-item">
-            <span className="fortune-label">お散歩日和度</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

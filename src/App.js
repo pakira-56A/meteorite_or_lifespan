@@ -14,7 +14,7 @@ function App() {
 
   // 地域コードのマッピング（気象庁APIで使用する地域コード）
   const regionCodes = {
-    北海道: "016000", // 札幌
+    北海道: "016000",
     青森: "020000",
     岩手: "030000",
     宮城: "040000",
@@ -72,7 +72,6 @@ function App() {
     setSelectedRegion(null)
     setWeatherData(null)
     setError(null)
-    console.log("ルーレット開始")
   }
 
   // ルーレットを停止して天気データを取得
@@ -96,8 +95,8 @@ function App() {
       console.log("取得した天気予報データ:", weatherData)
       setWeatherData(weatherData)
     } catch (err) {
-      console.error("天気データの取得に失敗しました:", err)
-      setError("天気データの取得に失敗しました。もう一度お試しください。")
+      console.error("天気データの取得に失敗", err)
+      setError("天気データの取得に失敗！もっかい試してみて！")
     }
 
     setIsSpinning(false)
@@ -309,16 +308,12 @@ function App() {
 
   return (
     <div className="app-container">
-      <header>
-        <h1>お天気おみくじ</h1>
-        <div className="character-container">
+        <h1 style={{color:"blue", marginTop: "0px",marginBottom: "10px"}}>お天気おみくじ</h1>
           <img
             src="/images/お天気お姉さん.png"
             alt="お天気お姉さん"
-            className="character-image"
+            style={{width: "120px"}}
           />
-        </div>
-      </header>
 
       <main>
         <div className="roulette-container">
@@ -347,7 +342,7 @@ function App() {
         </div>
 
         {isLoading && (
-          <div className="loading">気象庁APIからデータを取得中...</div>
+          <div className="loading">気象庁さんのデータを探し中...</div>
         )}
 
         {error && <div className="error-message">{error}</div>}
@@ -356,9 +351,9 @@ function App() {
       </main>
 
       <footer>
-        <p>※このアプリは気象庁の天気予報データを使用しています。</p>
+        <p>このアプリは気象庁さんの天気予報データを使ってるよ！</p>
         <p>
-          ※おみくじ結果はエンターテイメント目的であり、実際の運勢を保証するものではありません。
+          おみくじ結果は、実際の運勢を保証できないよ！
         </p>
       </footer>
     </div>

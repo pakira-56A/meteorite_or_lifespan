@@ -1,3 +1,4 @@
+import { XShareButton } from "../styles/xShareButton"
 import "./WeatherFortune.css"
 
 function WeatherFortune({ weatherData }) {
@@ -286,6 +287,11 @@ function WeatherFortune({ weatherData }) {
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
 
         <p className="fortune-message">{fortune.message}</p>
+
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <XShareButton weatherData={weatherData} fortune={fortune} />
+        </div>
+
       </div>
     </div>
   )

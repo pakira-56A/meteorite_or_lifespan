@@ -337,7 +337,7 @@ function App() {
           style={{ width: "90px", marginLeft: "30px" }}
         />
       </div>
-      <div style={{ color: "#0088ff", margin: "20px 0px" }}>
+      <div style={{ color: "#0088ff", margin: "15px 0px" }}>
         気象庁の天気予報データを使っておみくじ！
       </div>
 

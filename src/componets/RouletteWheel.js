@@ -22,7 +22,8 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
 
         if (elapsed % speed < 16) {
           // 16msは約60FPSに相当
-          currentIndexRef.current = (currentIndexRef.current + 1) % regions.length
+          currentIndexRef.current =
+            (currentIndexRef.current + 1) % regions.length
 
           if (rouletteRef.current) {
             // 現在の地域を表示
@@ -62,4 +63,3 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
 }
 
 export default RouletteWheel
-

@@ -1,6 +1,6 @@
 # 
 **できるようになったこと**
-- https://meteorite-or-lifespan.vercel.app/
+- https://otenki-omikuji.vercel.app/
 - **変更前**
   
 - **変更後**

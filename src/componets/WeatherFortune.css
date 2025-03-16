@@ -41,14 +41,7 @@
   margin: 0 10px;
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-.weather-symbol:contains("→") {
-  color: #4a6fa5;
-}
-
-.weather-symbol:contains("+") {
-  color: #e74c3c;
+  color: green;
 }
 
 .fortune-clovers {
@@ -59,16 +52,15 @@
 }
 
 .clover {
+  color: lightgreen;
   margin: 0 2px;
 }
 
 .clover.filled {
-  color: #4caf50;
   opacity: 1;
 }
 
 .clover.empty {
-  color: #4caf50;
   opacity: 0.3;
 }
 
@@ -79,29 +71,6 @@
   font-weight: bold;
   line-height: 1.5;
   padding: 10px;
-  background-color: #ffffee;
+  background-color: #ffffde;
   border-radius: 10px;
-}
-
-.fortune-details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.fortune-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fortune-label {
-  font-size: 0.7rem;
-  color: green;
-}
-
-.fortune-value {
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: center;
 }

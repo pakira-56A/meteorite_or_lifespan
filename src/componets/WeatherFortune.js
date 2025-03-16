@@ -284,37 +284,11 @@ function WeatherFortune({ weatherData }) {
             />
           )}
         </div>
+        <span style={{color: "green"}}>ラッキー度</span>
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
-
 
         <p className="fortune-message">{fortune.message}</p>
 
-        <div className="fortune-details">
-          <div className="fortune-item">
-            <span className="fortune-label">空気おいしい度</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-          <div className="fortune-item">
-            <span className="fortune-label">気分アゲ度</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-          <div className="fortune-item">
-            <span className="fortune-label">お散歩しちゃう</span>
-            <div className="fortune-value">
-              {renderClovers(
-                Math.max(1, Math.floor(Math.random() * fortune.luck + 1))
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

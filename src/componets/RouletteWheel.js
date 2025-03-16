@@ -33,14 +33,13 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
 
         animationRef.current = requestAnimationFrame(animate)
       }
-
+      // ルーレットアニメーション開始
       animationRef.current = requestAnimationFrame(animate)
-      console.log("ルーレットアニメーション開始")
 
       return () => {
         if (animationRef.current) {
+          // ルーレットアニメーション停止
           cancelAnimationFrame(animationRef.current)
-          console.log("ルーレットアニメーション停止")
         }
       }
     }

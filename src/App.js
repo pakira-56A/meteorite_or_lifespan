@@ -310,7 +310,7 @@ function App() {
   return (
     <div className="app-container">
       <header>
-        <h1>能天気予報ルーレット</h1>
+        <h1>お天気おみくじ</h1>
         <div className="character-container">
           <img
             src="/images/お天気お姉さん.png"

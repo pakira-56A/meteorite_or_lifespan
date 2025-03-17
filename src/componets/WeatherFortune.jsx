@@ -291,7 +291,6 @@ function WeatherFortune({ weatherData }) {
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <XShareButton weatherData={weatherData} fortune={fortune} />
         </div>
-
       </div>
     </div>
   )

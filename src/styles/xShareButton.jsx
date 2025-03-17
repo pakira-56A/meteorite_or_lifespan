@@ -26,6 +26,7 @@ export const XShareButton = ({ weatherData, fortune }) => {
     >
       <img
         src={isHovered ? "/images/xshare-hover.svg" : "/images/xshare.svg"}
+        alt={`Xシェア`}
         style={{
           width: "30px",
           height: "30px"

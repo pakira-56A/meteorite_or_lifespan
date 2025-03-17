@@ -10,7 +10,7 @@
 ## 当サービス概要
 - 気象庁さんの予報データでおみくじが引けます！
 
-## 学んだ事
+## 今回のアプリで、Reactキャッチアップとして学んだ事
 **Fetch APIの方法**（`async` `await`）で、API KEYを取得・活用しなくてもAPIのデータが取得できる
 ```jsx
 const fetchWeatherForecast = async (regionCode, regionName) => {
@@ -20,4 +20,4 @@ const fetchWeatherForecast = async (regionCode, regionName) => {
     )..
 ```
 - ユーザーが止めたルーレットで地域を決め、気象庁APIの予報データを取得
-- 取得した予報データを、アプリ内に用意した画像で表示
+- APIから取得したデータを元に、アプリ内に用意した画像を出しわけができる

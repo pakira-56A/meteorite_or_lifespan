@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# [お天気ルーレットおみくじ](https://otenki-omikuji.vercel.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Image from Gyazo](https://i.gyazo.com/1c85719846e729406564c77a90fb0e7c.png)](https://otenki-omikuji.vercel.app/)
 
-## Available Scripts
+- React（JavaScript）をキャッチアップし始めて１週間後、４日間（20時間）で作ったミニアプリです！
+- 「**Reactのキャッチアップの為、"書く力"より先に"読み取って修正する力"をつけるため**のミニアプリ」です。    
+  なので、このアプリのコードは一部 V0 という AI に書かせました。  
+  そこから手動で修正やコンポーネント化を加えたり、基礎的なJavaScriptの書き方を模写して学んでゆきました。
 
-In the project directory, you can run:
+## 当サービス概要
+- 気象庁さんの予報データでおみくじが引けます！
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 学んだ事
+**Fetch APIの方法**（`async` `await`）で、API KEYを取得・活用しなくてもAPIのデータが取得できる
+```jsx
+const fetchWeatherForecast = async (regionCode, regionName) => {
+  try { // 気象庁の週間予報XMLデータを取得
+    const response = await fetch(
+      `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
+    )..
+```
+- ユーザーが止めたルーレットで地域を決め、気象庁APIの予報データを取得
+- 取得した予報データを、アプリ内に用意した画像で表示

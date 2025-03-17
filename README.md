@@ -12,14 +12,14 @@
 - おみくじ結果を X（旧Twitter）でシェアできます
 
 ## 今回のアプリで、Reactキャッチアップとして学んだ事
-**Fetch APIの方法**（`async` `await`）で、API KEYを取得・活用しなくてもAPIのデータが取得できる
-```jsx
-const fetchWeatherForecast = async (regionCode, regionName) => {
-  try { // 気象庁の週間予報XMLデータを取得
-    const response = await fetch(
-      `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
-    )..
-```
+- **Fetch APIの方法**（`async` `await`）で、API KEYを取得・活用しなくてもAPIのデータが取得できる
+  ```jsx
+  const fetchWeatherForecast = async (regionCode, regionName) => {
+    try { // 気象庁の週間予報XMLデータを取得
+      const response = await fetch(
+        `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
+      )..
+  ```
 - ユーザーが止めたルーレットで地域を決め、気象庁APIの予報データを取得
 - APIから取得したデータを元に、アプリ内に用意した画像を出しわけができる
 ___
@@ -35,13 +35,13 @@ ___
   - クレジットカードやメールアドレスを登録して取得したAPI_KEYなので、セキュリティの問題が発生すると考え
     NASA APIや翻訳APIの使用を断念しました。
   
-- **[{JSON}Placeholder_API](https://github.com/typicode/jsonplaceholder)の使用を断念した話  **
+- **[{JSON}Placeholder_API](https://github.com/typicode/jsonplaceholder)の使用を断念した話**  
   - 公式リポジトリを`fork/clone`し  
     自分のリポジトリと作業ディレクトリで、オリジナルの投稿サイトAPI(自分専用API)を作成し  
     その自分専用APIからデータを取得し、ミニプリを作ろうとしました。  
   - しかし、[{JSON}Placeholder_API](https://github.com/typicode/jsonplaceholder)は  
-    [My JSON server](https://my-json-server.typicode.com/)というサービス（有料）と掛け合わせないと使えない様でした。
-  - コスト的にも時間的にも、API ✖️ React 初心者がいきなりAPIと他のサービスを掛け合わせた実装をするのは
+    [My JSON server](https://my-json-server.typicode.com/)というサービス（有料）と掛け合わせないと使えない様でした。  
+  - コスト的にも時間的にも、API ✖️ React 初心者がいきなりAPIと他のサービスを掛け合わせた実装をするのは  
     身の丈にあわず、間に合わない・完成という事態をさけるため  
-    [{JSON}Placeholder_API](https://github.com/typicode/jsonplaceholder)の使用を断念いたしました。
+    [{JSON}Placeholder_API](https://github.com/typicode/jsonplaceholder)の使用を断念いたしました。  
 

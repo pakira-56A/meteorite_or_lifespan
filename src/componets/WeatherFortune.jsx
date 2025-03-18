@@ -15,7 +15,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/晴れ.png",
         message:
-          "あっぱれ！キラキラ輝く１日！新しい事どんどんチャレンジしーちゃお🥳",
+          "あっぱれ！才能が開花してキラキラ輝く日✨新しい事どんどんチャレンジしーちゃお🥳",
         luck: 5
       }
     } else if (weather.includes("晴れ") && weather.includes("曇り")) {
@@ -23,7 +23,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/曇り.png",
         message:
-          "君の持ち前の明るさで、きっと晴れ間が見えるよ！☀️チャンスをしっかり掴んでね！",
+          "君の持ち前の明るさで、きっと晴れ間が見えるよ！☀️チャンス掴んじゃお！",
         luck: 4
       }
     } else if (
@@ -35,7 +35,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/曇り.png",
         message:
-          "雲の上はいつも晴れてるんだって☀️今日は自分とゆっくり向き合ってみるのもいいね☺️",
+          "雲の上はいつも晴れてるんだって☀️自分を見つめ直すチャンスかも！心の整理をしてスッキリしよ☺️",
         luck: 3
       }
     } else if (weather.includes("雨") && weather.includes("曇り")) {
@@ -43,7 +43,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/曇りと雨.png",
         message:
-          "雨降って地固まるってゆーからさ！今日はクリエイティブな事して、新しい発見しーちゃおう💃",
+          "雨降って地固まる、発想力が冴える日✨創作や学びのチャンス！新しい発見しーちゃおう💃",
         luck: 3
       }
     } else if (weather.includes("雨") && !weather.includes("雷")) {
@@ -51,7 +51,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/雨.png",
         message:
-          "雨の日は成長のチャンス！この雨が、未来の花を咲かせるよ！家でゆっくり過ごすのもいいね🍵",
+          "雨の日は浄化のタイミング🌧️余計なものを手放して心をスッキリさせちゃお！🍵",
         luck: 3
       }
     } else if (
@@ -62,7 +62,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/吹雪.png",
         message:
-          "今日は無理しないで！！たまにはお家でゆーっくりする日も必要。心と体を温めて、休んでね🫕",
+          "今日は無理しないで！たまにはお家でゆっくり心を整えるのが吉✨心と体を温めて休もう🫕",
         luck: 2
       }
     } else if (weather.includes("雪")) {
@@ -70,7 +70,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/雪.png",
         message:
-          "雪みたいに真っ白な気持ちで過ごせば、きっと素敵な１日になるよ！静かに過ごす時間も大切にね☺️",
+          "雪の真っ白なきもちで心をリセット！新しいスタートを切るチャンス！穏やかに過ごしてみよう☺️",
         luck: 2
       }
     } else if (weather.includes("霧")) {
@@ -78,7 +78,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/霧.png",
         message:
-          "先が見えにくい時は、焦らずゆっくり進もう！自分の直感を信じていけば、きっと道は開ける！🏃‍♀️",
+          "視界がぼんやりでも大丈夫！九星気学的に直感が冴える日✨自分を信じて焦らずゆっくり進もう🏃‍♀️",
         luck: 2
       }
     } else if (weather.includes("雷")) {
@@ -86,7 +86,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/雷.png",
         message:
-          "変化のサインだ！九星気学では、雷は新しい始まりを意味するよ👀 ワクワクしちゃうね！",
+          "雷は運気の転換期⚡九星気学では新しいステージの始まり！ビビらずワクワクしてこう！😊",
         luck: 1
       }
     } else {
@@ -95,7 +95,7 @@ function WeatherFortune({ weatherData }) {
         result: weather,
         imagePath: "/images/曇り.png",
         message:
-          "変わりやすい天気？どんな天気も楽しめる君はすごい！柔軟に楽しもう！",
+          "変わりやすい天気だね！！君の柔軟な心で、どんな日も楽しめるよ！✨",
         luck: 3
       }
     }

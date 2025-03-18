@@ -334,7 +334,7 @@ function App() {
         <img
           src="/images/おみくじ.png"
           alt="おみくじ"
-          style={{ width: "90px", marginLeft: "30px" }}
+          style={{ width: "90px", marginLeft: "30px", opacity: "0.8" }}
         />
       </div>
       <div style={{ color: "#0088ff", margin: "15px 0px" }}>

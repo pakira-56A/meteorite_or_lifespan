@@ -12,13 +12,15 @@
 
 ## 当サービス概要
 - 気象庁さんの予報データでおみくじが引けます！
-- おみくじ結果を X（旧Twitter）でシェアできます
-
+- 遊んでいただいた皆様の感想はこちら → [#お天気ルーレットおみくじ](https://x.com/search?q=%23お天気ルーレットおみくじ&src=recent_search_click&f=live)
+  <img src="https://gyazo.com/75a9a31080f420ce89b00840651acba0.gif" alt="Image from Gyazo" width="500"/>
+  
 |       | 技術スタック                         |
 |---------|------------------------------|
 | 技術    | React、CSS、気象庁API     |
 | デプロイ| Vercel                      |
 | 機能    | Xシェア機能、OGP機能      |
+
 
 
 ## 今回のアプリで、Reactキャッチアップとして学んだ事

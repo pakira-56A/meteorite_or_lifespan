@@ -2,7 +2,7 @@ import { XShareButton } from "../styles/xShareButton"
 import "./WeatherFortune.css"
 
 function WeatherFortune({ weatherData }) {
-  // 天気画像の取得関数
+  // 与えられた天気のテキストから、天気画像のパスを取得させる
   const getWeatherImagePath = (weatherText) => {
     const weatherImages = {
       晴れ: "/images/晴れ.png",
@@ -13,31 +13,30 @@ function WeatherFortune({ weatherData }) {
       雷:   "/images/雷.png",
       吹雪: "/images/吹雪.png"
     }
+    // 天気画像のキー（天気の状態）をループ処理
     for (const weather of Object.keys(weatherImages)) {
-      if (weatherText.includes(weather)) {
+      if (weatherText.includes(weather)) { // 天気テストが、ループ中の天気の状態を含んでたら
         return weatherImages[weather] }
     }
     return "/images/曇り.png" // デフォルト
   }
 
-  // エラーハンドリング関数
   const handleImageError = (event, path) => {
     console.error(`画像の読み込みに失敗: ${path}`)
     event.target.src = "/images/曇り.png"
     event.target.alt = "画像が見つかんないよー"
   }
 
-  // 特定の天気キーワードを抽出する関数
+  // 特定の天気キーワードを抽出
   const extractWeatherKeyword = (text) => {
     const keywords = ["晴れ", "曇り", "雨", "雪", "霧", "雷", "吹雪"]
-    for (const keyword of keywords) {
-      if (text.includes(keyword)) {
-        return keyword }
+    for (const keyword of keywords) {  // 定義したキーワードをループ
+      if (text.includes(keyword)) {    // 指定された text が現在の keyword を含んでたら
+        return keyword }               // 一致したキーワードを返す
     }
     return "曇り" // デフォルト
   }
 
-  // 天気に基づいておみくじ結果を生成
   const getFortuneResult = (weather) => {
     const defaultMessage = "変わりやすい天気だね！！君の柔軟な心で、どんな日も楽しめるよ！✨"
     const fortuneMessages = {
@@ -70,21 +69,26 @@ function WeatherFortune({ weatherData }) {
                       luck: 1 }
     }
 
+    // 晴れで、雲り・雨・雪が含まれないなら
     if ( weather.includes("晴れ") && !weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪") ) {
       return fortuneMessages.sunshine
     }
+    // 晴れと曇りを含むなら
     else if (weather.includes("晴れ") && weather.includes("曇り")) {
       return fortuneMessages.sunAndClouds
     }
+    // 曇りで、雨・雪を含まないなら
     else if ( weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪")) {
       return fortuneMessages.cloudy
     }
+    // 雨と曇りを含むなら
     else if (weather.includes("雨") && weather.includes("曇り")) {
       return fortuneMessages.rainAndClouds
     }
     else if (weather.includes("雨")) {
       return fortuneMessages.rain
     }
+    // 雪で、「強い」「暴風」が含むなら
     else if ( weather.includes("雪") && (weather.includes("強い") || weather.includes("暴風"))){
       return fortuneMessages.heavySnow
     }
@@ -98,29 +102,27 @@ function WeatherFortune({ weatherData }) {
       return fortuneMessages.thunder
     }
     else {
-      // デフォルトの場合は曇りの画像を使用
-      return {result: weather,
-              imagePath: "/images/曇り.png",
-              message: defaultMessage,
-              luck: 3 }
+      return {result: weather, imagePath: "/images/曇り.png", message: defaultMessage, luck: 3 }
     }
   }
 
-  // 天気の表示タイプを判定し、画像パスを取得
+  // 天気の表示タイプを決め、画像パスを取得
   const getWeatherImages = (weather) => {
     if (weather.includes("のち")) {
       const [firstWeather, secondWeather] = weather.split("のち")
-      return {type: "transition",
-              firstImagePath: getWeatherImagePath(firstWeather),
+      return {type: "transition",     // 遷移タイプの天気だと示す
+              firstImagePath:  getWeatherImagePath(firstWeather),
               secondImagePath: getWeatherImagePath(secondWeather),
               symbol: "→" }
     }
     else if (weather.includes("を伴う")) {
+      // 「で」区切りで最初の部分から主要な天気を抽出
       const mainWeather = extractWeatherKeyword(weather.split("で")[0])
+      // 主要な天気の後に続く天気を抽出
       const accompanyingWeather = extractWeatherKeyword( weather.split("を伴う")[0].split("で")[1] || weather )
 
-      return {type: "accompanying",
-              firstImagePath: getWeatherImagePath(mainWeather),
+      return {type: "accompanying",  // 伴う
+              firstImagePath:  getWeatherImagePath(mainWeather),
               secondImagePath: getWeatherImagePath(accompanyingWeather),
               symbol: "+" }
     }
@@ -130,24 +132,24 @@ function WeatherFortune({ weatherData }) {
     }
   }
 
+  // お天気データを基におみくじ結果を取得
   const fortune = getFortuneResult(weatherData.weather)
   const weatherImages = getWeatherImages(weatherData.weather)
 
   // クローバーの数を表示
   const renderClovers = (luck) => (
     <>
-      {[...Array(luck)].map((_, i) => (
+      {[...Array(luck)].map((_, i) => (      // ループを使って、運の数に応じた充填されたクローバーを生成
         <span key={`filled-${i}`} className="clover filled">🍀</span>
       ))}
-      {[...Array(5 - luck)].map((_, i) => (
+      {[...Array(5 - luck)].map((_, i) => (  // 最大5つから運の数を引いた数の、空のクローバーを生成
         <span key={`empty-${i}`} className="clover empty">🍀</span>
       ))}
     </>
   )
 
-  // 日付をフォーマット
   const formatDate = (dateString) => {
-    const date = new Date(dateString)
+    const date = new Date(dateString)  // 日付オブジェクトに変換
     return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
   }
 
@@ -156,9 +158,12 @@ function WeatherFortune({ weatherData }) {
       <div className="fortune-card">
         <div className="fortune-header">
           <span className="region-date">
+            {/* 日付をフォーマットし、地域情報を表示 */}
             {formatDate(weatherData.date)} {weatherData.region}
           </span>
+
           {weatherData.weather}
+          {/* 最大温度・最小温度があるなら、表示 */}
           {weatherData.temperature.max && weatherData.temperature.min
             ? ` ${weatherData.temperature.max}℃〜${weatherData.temperature.min}℃`
             : ""}
@@ -167,37 +172,29 @@ function WeatherFortune({ weatherData }) {
         <div className="weather-image-container">
           {weatherImages.type !== "single" ? (
             <>
-              <img
-                src={weatherImages.firstImagePath || "/placeholder.svg"}
-                alt={weatherImages.firstWeather}
-                className="weather-image combined-image"
-                onError={(e) =>
-                  handleImageError(e, weatherImages.firstImagePath)
-                }
-              />
+              <img  src={weatherImages.firstImagePath || "/placeholder.svg"}
+                    alt={weatherImages.firstWeather}
+                    className="weather-image combined-image"
+                    onError={(e) =>
+                      handleImageError(e, weatherImages.firstImagePath)} />
+
               <span className="weather-symbol">{weatherImages.symbol}</span>
-              <img
-                src={weatherImages.secondImagePath || "/placeholder.svg"}
-                alt={weatherImages.secondWeather}
-                className="weather-image combined-image"
-                onError={(e) =>
-                  handleImageError(e, weatherImages.secondImagePath)
-                }
-              />
-            </>
-          ) : (
-            <img
-              src={weatherImages.imagePath || fortune.imagePath}
-              alt={fortune.result}
-              className="weather-image"
-              onError={(e) =>
-                handleImageError(
-                  e,
-                  weatherImages.imagePath || fortune.imagePath
-                )
-              }
-            />
-          )}
+
+              <img  src={weatherImages.secondImagePath || "/placeholder.svg"}
+                    alt={weatherImages.secondWeather}
+                    className="weather-image combined-image"
+                    onError={(e) =>
+                      handleImageError(e, weatherImages.secondImagePath) } />
+            </> )
+            : (   // 単一の天気画像や、おみくじの画像（fortune）を使いう
+            <img  src={weatherImages.imagePath || fortune.imagePath}
+                  alt={fortune.result}
+                  className="weather-image"
+                  onError={(e) =>
+                    handleImageError(
+                      e,
+                      weatherImages.imagePath || fortune.imagePath ) } />)
+          }
         </div>
         <span style={{ color: "green" }}>ラッキー度</span>
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>

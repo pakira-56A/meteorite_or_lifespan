@@ -4,54 +4,46 @@ import { useEffect, useRef, useState } from "react"
 import "./RouletteWheel.css"
 
 function RouletteWheel({ regions, isSpinning, selectedRegion }) {
-  const rouletteRef = useRef(null)
+  const rouletteRef  = useRef(null)  // ルーレットの要素を、再レンダリングに影響されずに・直接操作するための参照をつくる
   const animationRef = useRef(null)
-  const [displayedRegion, setDisplayedRegion] = useState(regions[0]) // 表示される地域をstateで管理
+  const [displayedRegion, setDisplayedRegion] = useState(regions[0]) // 表示される地域をuseStateで管理
 
   // ルーレットのアニメーション
-  useEffect(() => {
+  useEffect(() => {   // コンポーネントが描画された後の処理
     if (isSpinning) {
-      let startTime
-      let currentIndex = 0 // ローカル変数としてcurrentIndexを定義
+      let startTime           // アニメの開始時間
+      let stopRegionIndex = 0 // ローカル変数としてstopRegionIndexを定義
 
-      const animate = (timestamp) => {
-        if (!startTime) startTime = timestamp
-        const elapsed = timestamp - startTime
+      const animationMoving = (timestamp) => {  // 現在の時刻の情報を情報を渡す
+        if (!startTime) startTime = timestamp   // startTime が未定義なら、アニメの開始時刻を現在の timestamp で設定
+        const elapsed = timestamp - startTime   // 経過時間を計算
+        const speed = 50;
 
-        // 回転速度を計算（時間経過とともに少し速くなる）
-        const speed = Math.min(100, 50 + elapsed / 100)
-
-        if (elapsed % speed < 16) {
-          // 16msは約60FPSに相当
-          currentIndex = (currentIndex + 1) % regions.length
-          setDisplayedRegion(regions[currentIndex]) // 表示される地域を更新
+        if (elapsed % speed < 16) { // 16msは約60FPSに相当
+            // インクリメントし、regions 配列の長さで割った余りをとり、インデックスが配列の長さを超えないようにする
+            stopRegionIndex = (stopRegionIndex + 1) % regions.length;
+            setDisplayedRegion(regions[stopRegionIndex]);  // 表示される地域を更新
         }
-
-        animationRef.current = requestAnimationFrame(animate)
-      }
+        animationRef.current = requestAnimationFrame(animationMoving); // 次のフレームをリクエスト
+      };
 
       // ルーレットアニメーション開始
-      animationRef.current = requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(animationMoving)
 
-      return () => {
-        // ルーレットアニメーション停止
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current)
-        }
-      }
-    } else if (selectedRegion) {
-      // selectedRegionが設定されたら、その地域を表示
-      setDisplayedRegion(selectedRegion)
+      return () => {  // コンポーネントがアンマウントされる際・依存関係が変更される際に、この関数を実行
+        if (animationRef.current) {  // アニメフレームがあるなら、アニメを停止
+          cancelAnimationFrame(animationRef.current) } }
     }
-  }, [isSpinning, regions, selectedRegion])
+    else if (selectedRegion) {  // isSpinning が falseで、 selectedRegion が設定されてたら...
+      setDisplayedRegion(selectedRegion) }
+  }, [isSpinning, regions, selectedRegion])  // useEffectの依存関係を指定。これらの値が変更されると、上記の関数が再実行される
 
   return (
     <div className="roulette-wheel">
       <div className="roulette-display" ref={rouletteRef}>
         {displayedRegion}
       </div>
-    </div>
-  )
+    </div> )
 }
 
 export default RouletteWheel

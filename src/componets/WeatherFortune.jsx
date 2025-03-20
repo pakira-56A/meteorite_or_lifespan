@@ -189,13 +189,6 @@ function WeatherFortune({ weatherData }) {
   const fortune = getFortuneResult(weatherData.weather)
   const weatherImages = getWeatherImages(weatherData.weather)
 
-  console.log(`おみくじ結果: ${fortune.result} (天気: ${weatherData.weather})`)
-  if (weatherImages.type !== "single") {
-    console.log(
-      `天気の表示タイプ: ${weatherImages.type}, ${weatherImages.firstWeather} ${weatherImages.symbol} ${weatherImages.secondWeather}`
-    )
-  }
-
   // 運勢に応じたクローバーの数を表示
   const renderClovers = (luck) => {
     // 塗りつぶしのクローバーと薄緑のクローバーを表示

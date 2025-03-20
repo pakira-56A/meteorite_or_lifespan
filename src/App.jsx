@@ -66,7 +66,7 @@ function App() {
   // 地域リスト（表示用）
   const regions = Object.keys(regionCodes)
 
-  // ルーレットを開始
+  // ルーレットをスタート
   const startRoulette = () => {
     setIsSpinning(true)
     setSelectedRegion(null)
@@ -74,7 +74,7 @@ function App() {
     setError(null)
   }
 
-  // ルーレットを停止して天気データを取得
+  // ルーレットをストップし、天気データを取得
   const stopRoulette = async () => {
     if (!isSpinning) return
 
@@ -87,12 +87,9 @@ function App() {
 
     setSelectedRegion(region)
 
-    console.log(`選択された地域: ${region} (コード: ${regionCode})`)
-
     try {
       // 気象庁APIから天気予報データを取得
       const weatherData = await fetchWeatherForecast(regionCode, region)
-      console.log("取得した天気予報データ:", weatherData)
       setWeatherData(weatherData)
     } catch (err) {
       console.error("天気データの取得に失敗", err)
@@ -107,9 +104,7 @@ function App() {
   const fetchWeatherForecast = async (regionCode, regionName) => {
     try {
       // 気象庁の週間予報XMLデータを取得
-      const response = await fetch(
-        `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
-      )
+      const response = await fetch( `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json` )
 
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`)
@@ -168,10 +163,7 @@ function App() {
         date: formattedDate,
         weather: weatherText,
         weatherCode: weatherCode,
-        temperature: {
-          max: maxTemp,
-          min: minTemp
-        }
+        temperature: { max: maxTemp, min: minTemp }
       }
     } catch (error) {
       console.error("気象庁APIからのデータ取得エラー:", error)
@@ -308,38 +300,15 @@ function App() {
 
   return (
     <div className="app-container">
-      <h2
-        style={{
-          color: "blue",
-          marginTop: "0px",
-          backgroundColor: "#FFFFAA",
-          borderRadius: "10px"
-        }}
-      >
+      <h2 style={{ color: "blue", marginTop: "0px", backgroundColor: "#FFFFAA", borderRadius: "10px" }} >
         お天気ルーレットおみくじ
       </h2>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <img
-          src="/images/お天気お姉さん.png"
-          alt="お天気お姉さん"
-          style={{ width: "120px" }}
-        />
-        <img
-          src="/images/おみくじ.png"
-          alt="おみくじ"
-          style={{ width: "90px", marginLeft: "30px", opacity: "0.8" }}
-        />
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center"}} >
+        <img src="/images/お天気お姉さん.png" alt="お天気お姉さん" style={{ width: "120px" }} />
+        <img src="/images/おみくじ.png"      alt="おみくじ"      style={{ width: "90px", marginLeft: "30px", opacity: "0.8" }} />
       </div>
-      <div style={{ color: "#0088ff", margin: "15px 0px" }}>
-        気象庁さんの予報データでおみくじしよう！
-      </div>
+      <div style={{ color: "#0088ff", margin: "15px 0px" }}>気象庁さんの予報データでおみくじしよう！</div>
 
       <main>
         <div className="roulette-container">
@@ -355,21 +324,15 @@ function App() {
             onClick={startRoulette}
             disabled={isSpinning || isLoading}
             className="control-button start-button"
-          >
-            スタート
-          </button>
+          >スタート</button>
           <button
             onClick={stopRoulette}
             disabled={!isSpinning || isLoading}
             className="control-button stop-button"
-          >
-            ストップ
-          </button>
+          >ストップ</button>
         </div>
 
-        {isLoading && (
-          <div className="loading">気象庁さんのデータを探し中...</div>
-        )}
+        {isLoading && ( <div className="loading">気象庁さんのデータを探し中...</div> )}
 
         {error && <div className="error-message">{error}</div>}
 

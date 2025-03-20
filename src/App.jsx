@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import "./App.css"
-import WeatherFortune from "./componets/WeatherFortune"
-import RouletteWheel from "./componets/RouletteWheel"
+import WeatherFortune from "./components/WeatherFortune"
+import RouletteWheel from "./components/RouletteWheel"
 
 function App() {
   const [isSpinning, setIsSpinning] = useState(false)
@@ -63,7 +63,7 @@ function App() {
     沖縄: "471000"
   }
 
-  // 地域リスト（表示用）
+  // 地域リスト
   const regions = Object.keys(regionCodes)
 
   // ルーレットをスタート
@@ -100,67 +100,51 @@ function App() {
     setIsLoading(false)
   }
 
-  // 気象庁APIから天気予報データを取得する関数
+
   const fetchWeatherForecast = async (regionCode, regionName) => {
     try {
       // 気象庁の週間予報XMLデータを取得
-      const response = await fetch( `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json` )
-
+      const response = await fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`)
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`)
       }
 
       const data = await response.json()
       console.log("気象庁APIレスポンス:", data)
-
-      // データの構造を解析
-      // 通常、data[0]は地域の予報データを含む
       const areaData = data[0]
       const timeSeriesData = areaData.timeSeries
 
-      // 天気予報データ（通常、timeSeriesData[0]は天気、timeSeriesData[1]は気温）
       const weatherForecast = timeSeriesData[0]
-      const temperatureForecast = timeSeriesData[2] || timeSeriesData[1] // 気温データの位置が異なる場合がある
+      const temperatureForecast = timeSeriesData[2] || timeSeriesData[1]
 
-      // 予報日を取得（最初の予報日を使用）
-      const forecastDate = new Date(weatherForecast.timeDefines[0])
-      const formattedDate = forecastDate.toISOString().split("T")[0]
+      const forecastDate = new Date(weatherForecast.timeDefines[0]).toISOString().split("T")[0]
 
-      // 地域の天気コードと天気テキストを取得
-      const weatherCode =
-        weatherForecast.areas.find(
-          (area) =>
-            area.area.name === regionName || area.area.code === regionCode
-        )?.weatherCodes[0] || weatherForecast.areas[0].weatherCodes[0]
+      const weatherCode = weatherForecast.areas.find(
+        (area) => area.area.name === regionName || area.area.code === regionCode
+      )?.weatherCodes[0] || weatherForecast.areas[0].weatherCodes[0]
 
       const weatherText = getWeatherTextFromCode(weatherCode)
 
-      // 気温データを取得
       let maxTemp = null
       let minTemp = null
 
       if (temperatureForecast) {
-        const tempArea =
-          temperatureForecast.areas.find(
-            (area) =>
-              area.area.name === regionName || area.area.code === regionCode
-          ) || temperatureForecast.areas[0]
+        const tempArea = temperatureForecast.areas.find(
+          (area) => area.area.name === regionName || area.area.code === regionCode
+        ) || temperatureForecast.areas[0]
 
         if (tempArea.temps) {
-          // 最高気温と最低気温が別々に格納されている場合
           maxTemp = Number.parseInt(tempArea.temps[1])
           minTemp = Number.parseInt(tempArea.temps[0])
         } else if (tempArea.tempsMax && tempArea.tempsMin) {
-          // 最高気温と最低気温が別々の配列に格納されている場合
           maxTemp = Number.parseInt(tempArea.tempsMax[0])
           minTemp = Number.parseInt(tempArea.tempsMin[0])
         }
       }
 
-      // 整形した天気データを返す
       return {
         region: regionName,
-        date: formattedDate,
+        date: forecastDate,
         weather: weatherText,
         weatherCode: weatherCode,
         temperature: { max: maxTemp, min: minTemp }
@@ -173,7 +157,6 @@ function App() {
 
   // 気象庁の天気コードから天気テキストを取得する関数
   const getWeatherTextFromCode = (code) => {
-    // 気象庁の天気コードと対応する天気
     const weatherCodes = {
       100: "晴れ",
       101: "晴れ時々曇り",
@@ -300,13 +283,13 @@ function App() {
 
   return (
     <div className="app-container">
-      <h2 style={{ color: "blue", marginTop: "0px", backgroundColor: "#FFFFAA", borderRadius: "10px" }} >
+      <h2 style={{ color: "blue", marginTop: "0px", backgroundColor: "#FFFFAA", borderRadius: "10px" }}>
         お天気ルーレットおみくじ
       </h2>
 
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center"}} >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <img src="/images/お天気お姉さん.png" alt="お天気お姉さん" style={{ width: "120px" }} />
-        <img src="/images/おみくじ.png"      alt="おみくじ"      style={{ width: "90px", marginLeft: "30px", opacity: "0.8" }} />
+        <img src="/images/おみくじ.png" alt="おみくじ" style={{ width: "90px", marginLeft: "30px", opacity: "0.8" }} />
       </div>
       <div style={{ color: "#0088ff", margin: "15px 0px" }}>気象庁さんの予報データでおみくじしよう！</div>
 
@@ -332,10 +315,8 @@ function App() {
           >ストップ</button>
         </div>
 
-        {isLoading && ( <div className="loading">気象庁さんのデータを探し中...</div> )}
-
+        {isLoading && (<div className="loading">気象庁さんのデータを探し中...</div>)}
         {error && <div className="error-message">{error}</div>}
-
         {weatherData && <WeatherFortune weatherData={weatherData} />}
       </main>
     </div>

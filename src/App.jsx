@@ -91,6 +91,7 @@ function App() {
       // 気象庁APIから天気予報データを取得
       const weatherData = await fetchWeatherForecast(regionCode, region)
       setWeatherData(weatherData)
+      console.log("取得した天気予報データ:", weatherData)
     } catch (err) {
       console.error("天気データの取得に失敗", err)
       setError("天気データの取得に失敗！もっかい試してみて！")

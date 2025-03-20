@@ -24,14 +24,17 @@
 
 
 ## 今回のアプリで、Reactキャッチアップとして学んだ事
-- **Fetch APIの方法**（`async` `await`）で、API KEYを取得・活用しなくてもAPIのデータが取得できる
+- **Fetch APIの方法**で、API KEYを取得・活用しなくてもAPIのデータが取得できる
   - [参考記事](https://www.resumy.ai/posts/18832dcc-5f97-4b4d-9ae8-2d161bca922a)
+  - `async`で非同期関数として定義する（この関数内で`await`を使えるようになる）
+  - `await`はPromiseが解決されるまで処理を一時停止し、結果を待つ。
     ```jsx
     const fetchWeatherForecast = async (regionCode, regionName) => {
-      try {      // 気象庁の週間予報XMLデータを取得
-        const response = await fetch(
-          `https://www.jma.go.jp/bosai/forecast/data/forecast/${regionCode}.json`
-        )..
+        // 非同期処理の内容
+        const response = await fetch(`https://APIのドメイン.com/api/${regionCode}`);
+        const data     = await response.json();
+        return data;
+    }
     ```
 - ユーザーが止めたルーレットで地域を決め、気象庁APIの予報データを取得
 - APIから取得したデータを元に、アプリ内に用意した画像を出しわけができる

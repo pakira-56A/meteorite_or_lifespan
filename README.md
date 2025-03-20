@@ -26,6 +26,7 @@
 ## 今回のアプリで、Reactキャッチアップとして学んだ事
 - **Fetch APIの方法**で、API KEYを取得・活用しなくてもAPIのデータが取得できる
   - [参考記事](https://www.resumy.ai/posts/18832dcc-5f97-4b4d-9ae8-2d161bca922a)
+- **非同期通信**
   - `async`で非同期関数として定義する（この関数内で`await`を使えるようになる）
   - `await`はPromiseが解決されるまで処理を一時停止し、結果を待つ。
     ```jsx

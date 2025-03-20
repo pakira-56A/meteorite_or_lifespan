@@ -29,12 +29,13 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
 
         animationRef.current = requestAnimationFrame(animate)
       }
+
       // ルーレットアニメーション開始
       animationRef.current = requestAnimationFrame(animate)
 
       return () => {
+        // ルーレットアニメーション停止
         if (animationRef.current) {
-          // ルーレットアニメーション停止
           cancelAnimationFrame(animationRef.current)
         }
       }
@@ -43,13 +44,6 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
       setDisplayedRegion(selectedRegion)
     }
   }, [isSpinning, regions, selectedRegion])
-
-  // 選択された地域が変更されたとき
-  useEffect(() => {
-    if (selectedRegion && rouletteRef.current) {
-      rouletteRef.current.textContent = selectedRegion
-    }
-  }, [selectedRegion])
 
   return (
     <div className="roulette-wheel">

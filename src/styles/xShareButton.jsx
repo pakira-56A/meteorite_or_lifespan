@@ -23,15 +23,11 @@ export const XShareButton = ({ weatherData, fortune }) => {
       onMouseOver={() => setIsHovered(true)} // Hover stateをtrueに
       onMouseOut={() => setIsHovered(false)} // Hover stateをfalseに
       target="_blank"
-      rel="noopener"
-    >
+      rel="noopener">
       <img
         src={isHovered ? "/images/xshare-hover.svg" : "/images/xshare.svg"}
         alt={`Xシェア`}
-        style={{
-          width: "30px",
-          height: "30px"
-        }}
+        style={{ width: "30px", height: "30px" }}
       />
     </TwitterShareButton>
   )

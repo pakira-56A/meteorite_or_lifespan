@@ -3,5 +3,7 @@
   "semi": false,
   "singleQuote": false,
   "endOfLine": "auto",
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "bracketSameLine": true,
+  "jsxBracketSameLine": true
 }

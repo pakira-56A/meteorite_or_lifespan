@@ -2,140 +2,32 @@ import { XShareButton } from "../styles/xShareButton"
 import "./WeatherFortune.css"
 
 function WeatherFortune({ weatherData }) {
-  // 天気に基づいておみくじ結果を生成
-  const getFortuneResult = (weather) => {
-    // 天気パターンに基づいておみくじ結果を決定
-    if (
-      weather.includes("晴れ") &&
-      !weather.includes("曇り") &&
-      !weather.includes("雨") &&
-      !weather.includes("雪")
-    ) {
-      return {
-        result: weather,
-        imagePath: "/images/晴れ.png",
-        message:
-          "あっぱれ！才能が開花してキラキラ輝く日✨新しい事どんどんチャレンジしーちゃお🥳",
-        luck: 5
-      }
-    } else if (weather.includes("晴れ") && weather.includes("曇り")) {
-      return {
-        result: weather,
-        imagePath: "/images/曇り.png",
-        message:
-          "君の持ち前の明るさで、きっと晴れ間が見えるよ！☀️チャンス掴んじゃお！",
-        luck: 4
-      }
-    } else if (
-      weather.includes("曇り") &&
-      !weather.includes("雨") &&
-      !weather.includes("雪")
-    ) {
-      return {
-        result: weather,
-        imagePath: "/images/曇り.png",
-        message:
-          "雲の上はいつも晴れてるんだって☀️自分を見つめ直すチャンスかも！心の整理をしてスッキリしよ☺️",
-        luck: 3
-      }
-    } else if (weather.includes("雨") && weather.includes("曇り")) {
-      return {
-        result: weather,
-        imagePath: "/images/曇りと雨.png",
-        message:
-          "雨降って地固まる、発想力が冴える日✨創作や学びのチャンス！新しい発見しーちゃおう💃",
-        luck: 3
-      }
-    } else if (weather.includes("雨") && !weather.includes("雷")) {
-      return {
-        result: weather,
-        imagePath: "/images/雨.png",
-        message:
-          "雨の日は浄化のタイミング🌧️余計なものを手放して心をスッキリさせちゃお！🍵",
-        luck: 3
-      }
-    } else if (
-      weather.includes("雪") &&
-      (weather.includes("強い") || weather.includes("暴風"))
-    ) {
-      return {
-        result: weather,
-        imagePath: "/images/吹雪.png",
-        message:
-          "今日は無理しないで！たまにはお家でゆっくり心を整えるのが吉✨心と体を温めて休もう🫕",
-        luck: 2
-      }
-    } else if (weather.includes("雪")) {
-      return {
-        result: weather,
-        imagePath: "/images/雪.png",
-        message:
-          "雪の真っ白なきもちで心をリセット！新しいスタートを切るチャンス！穏やかに過ごしてみよう☺️",
-        luck: 2
-      }
-    } else if (weather.includes("霧")) {
-      return {
-        result: weather,
-        imagePath: "/images/霧.png",
-        message:
-          "視界がぼんやりでも大丈夫！九星気学的に直感が冴える日✨自分を信じて焦らずゆっくり進もう🏃‍♀️",
-        luck: 2
-      }
-    } else if (weather.includes("雷")) {
-      return {
-        result: weather,
-        imagePath: "/images/雷.png",
-        message:
-          "雷は運気の転換期⚡九星気学では新しいステージの始まり！ビビらずワクワクしてこう！😊",
-        luck: 1
-      }
-    } else {
-      // デフォルトの場合は曇りの画像を使用
-      return {
-        result: weather,
-        imagePath: "/images/曇り.png",
-        message:
-          "変わりやすい天気だね！！君の柔軟な心で、どんな日も楽しめるよ！✨",
-        luck: 3
+  // 天気画像の取得関数
+  const getWeatherImagePath = (weatherText) => {
+    const weatherImages = {
+      晴れ: "/images/晴れ.png",
+      曇り: "/images/曇り.png",
+      雨: "/images/雨.png",
+      雪: "/images/雪.png",
+      霧: "/images/霧.png",
+      雷: "/images/雷.png",
+      吹雪: "/images/吹雪.png"
+    }
+
+    for (const weather of Object.keys(weatherImages)) {
+      if (weatherText.includes(weather)) {
+        return weatherImages[weather]
       }
     }
+
+    return "/images/曇り.png" // デフォルト
   }
 
-  // 天気文字列から天気画像のパスを取得する関数
-  const getWeatherImagePath = (weatherText) => {
-    if (
-      weatherText.includes("晴れ") &&
-      !weatherText.includes("曇り") &&
-      !weatherText.includes("雨") &&
-      !weatherText.includes("雪")
-    ) {
-      return "/images/晴れ.png"
-    } else if (weatherText.includes("曇り") && weatherText.includes("晴れ")) {
-      return "/images/曇り.png"
-    } else if (
-      weatherText.includes("曇り") &&
-      !weatherText.includes("雨") &&
-      !weatherText.includes("雪")
-    ) {
-      return "/images/曇り.png"
-    } else if (weatherText.includes("雨") && weatherText.includes("曇り")) {
-      return "/images/曇りと雨.png"
-    } else if (weatherText.includes("雨") && !weatherText.includes("雷")) {
-      return "/images/雨.png"
-    } else if (
-      weatherText.includes("雪") &&
-      (weatherText.includes("強い") || weatherText.includes("暴風"))
-    ) {
-      return "/images/吹雪.png"
-    } else if (weatherText.includes("雪")) {
-      return "/images/雪.png"
-    } else if (weatherText.includes("霧")) {
-      return "/images/霧.png"
-    } else if (weatherText.includes("雷")) {
-      return "/images/雷.png"
-    } else {
-      return "/images/曇り.png"
-    }
+  // エラーハンドリング関数
+  const handleImageError = (event, path) => {
+    console.error(`画像の読み込みに失敗: ${path}`)
+    event.target.src = "/images/曇り.png"
+    event.target.alt = "画像が見つかりません。"
   }
 
   // 特定の天気キーワードを抽出する関数
@@ -149,21 +41,120 @@ function WeatherFortune({ weatherData }) {
     return "曇り" // デフォルト
   }
 
+  // 天気に基づいておみくじ結果を生成
+  const getFortuneResult = (weather) => {
+    const defaultMessage =
+      "変わりやすい天気だね！！君の柔軟な心で、どんな日も楽しめるよ！✨"
+
+    const fortuneMessages = {
+      sunshine: {
+        message:
+          "あっぱれ！才能が開花してキラキラ輝く日✨新しい事どんどんチャレンジしーちゃお🥳",
+        imagePath: "/images/晴れ.png",
+        luck: 5
+      },
+      sunAndClouds: {
+        message:
+          "君の持ち前の明るさで、きっと晴れ間が見えるよ！☀️チャンス掴んじゃお！",
+        imagePath: "/images/曇り.png",
+        luck: 4
+      },
+      cloudy: {
+        message:
+          "雲の上はいつも晴れてるんだって☀️自分を見つめ直すチャンスかも！心の整理をしてスッキリしよ☺️",
+        imagePath: "/images/曇り.png",
+        luck: 3
+      },
+      rainAndClouds: {
+        message:
+          "雨降って地固まる、発想力が冴える日✨創作や学びのチャンス！新しい発見しーちゃおう💃",
+        imagePath: "/images/曇りと雨.png",
+        luck: 3
+      },
+      rain: {
+        message:
+          "雨の日は浄化のタイミング🌧️余計なものを手放して心をスッキリさせちゃお！🍵",
+        imagePath: "/images/雨.png",
+        luck: 3
+      },
+      heavySnow: {
+        message:
+          "今日は無理しないで！たまにはお家でゆっくり心を整えるのが吉✨心と体を温めて休もう🫕",
+        imagePath: "/images/吹雪.png",
+        luck: 2
+      },
+      snow: {
+        message:
+          "雪の真っ白なきもちで心をリセット！新しいスタートを切るチャンス！穏やかに過ごしてみよう☺️",
+        imagePath: "/images/雪.png",
+        luck: 2
+      },
+      fog: {
+        message:
+          "視界がぼんやりでも大丈夫！九星気学的に直感が冴える日✨自分を信じて焦らずゆっくり進もう🏃‍♀️",
+        imagePath: "/images/霧.png",
+        luck: 2
+      },
+      thunder: {
+        message:
+          "雷は運気の転換期⚡九星気学では新しいステージの始まり！ビビらずワクワクしてこう！😊",
+        imagePath: "/images/雷.png",
+        luck: 1
+      }
+    }
+
+    if (
+      weather.includes("晴れ") &&
+      !weather.includes("曇り") &&
+      !weather.includes("雨") &&
+      !weather.includes("雪")
+    ) {
+      return fortuneMessages.sunshine
+    } else if (weather.includes("晴れ") && weather.includes("曇り")) {
+      return fortuneMessages.sunAndClouds
+    } else if (
+      weather.includes("曇り") &&
+      !weather.includes("雨") &&
+      !weather.includes("雪")
+    ) {
+      return fortuneMessages.cloudy
+    } else if (weather.includes("雨") && weather.includes("曇り")) {
+      return fortuneMessages.rainAndClouds
+    } else if (weather.includes("雨")) {
+      return fortuneMessages.rain
+    } else if (
+      weather.includes("雪") &&
+      (weather.includes("強い") || weather.includes("暴風"))
+    ) {
+      return fortuneMessages.heavySnow
+    } else if (weather.includes("雪")) {
+      return fortuneMessages.snow
+    } else if (weather.includes("霧")) {
+      return fortuneMessages.fog
+    } else if (weather.includes("雷")) {
+      return fortuneMessages.thunder
+    } else {
+      // デフォルトの場合は曇りの画像を使用
+      return {
+        result: weather,
+        imagePath: "/images/曇り.png",
+        message: defaultMessage,
+        luck: 3
+      }
+    }
+  }
+
   // 天気の表示タイプを判定し、画像パスを取得
   const getWeatherImages = (weather) => {
     if (weather.includes("のち")) {
-      // 「のち」で分割して前後の天気を取得
       const [firstWeather, secondWeather] = weather.split("のち")
       return {
         type: "transition",
-        symbol: "→",
         firstImagePath: getWeatherImagePath(firstWeather),
         secondImagePath: getWeatherImagePath(secondWeather),
-        firstWeather,
-        secondWeather
+        symbol: "→"
       }
     } else if (weather.includes("を伴う")) {
-      // 「を伴う」を含む場合（例：雨で雷を伴う）
       const mainWeather = extractWeatherKeyword(weather.split("で")[0])
       const accompanyingWeather = extractWeatherKeyword(
         weather.split("を伴う")[0].split("で")[1] || weather
@@ -171,14 +162,11 @@ function WeatherFortune({ weatherData }) {
 
       return {
         type: "accompanying",
-        symbol: "+",
         firstImagePath: getWeatherImagePath(mainWeather),
         secondImagePath: getWeatherImagePath(accompanyingWeather),
-        firstWeather: mainWeather,
-        secondWeather: accompanyingWeather
+        symbol: "+"
       }
     } else {
-      // 単一の天気の場合
       return {
         type: "single",
         imagePath: getWeatherImagePath(weather)
@@ -189,32 +177,22 @@ function WeatherFortune({ weatherData }) {
   const fortune = getFortuneResult(weatherData.weather)
   const weatherImages = getWeatherImages(weatherData.weather)
 
-  // 運勢に応じたクローバーの数を表示
-  const renderClovers = (luck) => {
-    // 塗りつぶしのクローバーと薄緑のクローバーを表示
-    return (
-      <>
-        {[...Array(luck)].map((_, i) => (
-          <span key={`filled-${i}`} className="clover filled">
-            🍀
-          </span>
-        ))}
-        {[...Array(5 - luck)].map((_, i) => (
-          <span key={`empty-${i}`} className="clover empty">
-            🍀
-          </span>
-        ))}
-      </>
-    )
-  }
+  // クローバーの数を表示
+  const renderClovers = (luck) => (
+    <>
+      {[...Array(luck)].map((_, i) => (
+        <span key={`filled-${i}`} className="clover filled">🍀</span>
+      ))}
+      {[...Array(5 - luck)].map((_, i) => (
+        <span key={`empty-${i}`} className="clover empty">🍀</span>
+      ))}
+    </>
+  )
 
   // 日付をフォーマット
   const formatDate = (dateString) => {
     const date = new Date(dateString)
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    return `${year}/${month}/${day}`
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
   }
 
   return (
@@ -232,55 +210,42 @@ function WeatherFortune({ weatherData }) {
 
         <div className="weather-image-container">
           {weatherImages.type !== "single" ? (
-            // 複合的な天気の場合（遷移または伴う）
             <>
               <img
                 src={weatherImages.firstImagePath || "/placeholder.svg"}
                 alt={weatherImages.firstWeather}
                 className="weather-image combined-image"
-                onError={(e) => {
-                  console.error(
-                    `画像の読み込みに失敗: ${weatherImages.firstImagePath}`
-                  )
-                  e.target.src = "/images/曇り.png"
-                  e.target.alt = "画像が見つかんない！"
-                }}
+                onError={(e) =>
+                  handleImageError(e, weatherImages.firstImagePath)
+                }
               />
               <span className="weather-symbol">{weatherImages.symbol}</span>
               <img
                 src={weatherImages.secondImagePath || "/placeholder.svg"}
                 alt={weatherImages.secondWeather}
                 className="weather-image combined-image"
-                onError={(e) => {
-                  console.error(
-                    `画像の読み込みに失敗: ${weatherImages.secondImagePath}`
-                  )
-                  e.target.src = "/images/曇り.png"
-                  e.target.alt = "画像が見つかんない！"
-                }}
+                onError={(e) =>
+                  handleImageError(e, weatherImages.secondImagePath)
+                }
               />
             </>
           ) : (
-            // 単一の天気の場合
             <img
               src={weatherImages.imagePath || fortune.imagePath}
               alt={fortune.result}
               className="weather-image"
-              onError={(e) => {
-                console.error(
-                  `画像の読み込みに失敗: ${weatherImages.imagePath || fortune.imagePath}`
+              onError={(e) =>
+                handleImageError(
+                  e,
+                  weatherImages.imagePath || fortune.imagePath
                 )
-                e.target.src = "/images/曇り.png"
-                e.target.alt = "画像が見つかんない！"
-              }}
+              }
             />
           )}
         </div>
         <span style={{ color: "green" }}>ラッキー度</span>
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>
-
         <p className="fortune-message">{fortune.message}</p>
-
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <XShareButton weatherData={weatherData} fortune={fortune} />
         </div>

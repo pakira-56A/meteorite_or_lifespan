@@ -16,7 +16,8 @@ function WeatherFortune({ weatherData }) {
     // 天気画像のキー（天気の状態）をループ処理
     for (const weather of Object.keys(weatherImages)) {
       if (weatherText.includes(weather)) { // 天気テストが、ループ中の天気の状態を含んでたら
-        return weatherImages[weather] }
+        return weatherImages[weather]
+      }
     }
     return "/images/曇り.png" // デフォルト
   }
@@ -32,7 +33,8 @@ function WeatherFortune({ weatherData }) {
     const keywords = ["晴れ", "曇り", "雨", "雪", "霧", "雷", "吹雪"]
     for (const keyword of keywords) {  // 定義したキーワードをループ
       if (text.includes(keyword)) {    // 指定された text が現在の keyword を含んでたら
-        return keyword }               // 一致したキーワードを返す
+        return keyword                 // 一致したキーワードを返す
+      }
     }
     return "曇り" // デフォルト
   }
@@ -74,31 +76,31 @@ function WeatherFortune({ weatherData }) {
       return fortuneMessages.sunshine
     }
     // 晴れと曇りを含むなら
-    else if (weather.includes("晴れ") && weather.includes("曇り")) {
+    else if ( weather.includes("晴れ") && weather.includes("曇り") ) {
       return fortuneMessages.sunAndClouds
     }
     // 曇りで、雨・雪を含まないなら
-    else if ( weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪")) {
+    else if ( weather.includes("曇り") && !weather.includes("雨") && !weather.includes("雪") ) {
       return fortuneMessages.cloudy
     }
     // 雨と曇りを含むなら
-    else if (weather.includes("雨") && weather.includes("曇り")) {
+    else if ( weather.includes("雨") && weather.includes("曇り") ) {
       return fortuneMessages.rainAndClouds
     }
-    else if (weather.includes("雨")) {
+    else if ( weather.includes("雨") ) {
       return fortuneMessages.rain
     }
     // 雪で、「強い」「暴風」が含むなら
-    else if ( weather.includes("雪") && (weather.includes("強い") || weather.includes("暴風"))){
+    else if ( weather.includes("雪") && (weather.includes("強い") || weather.includes("暴風")) ) {
       return fortuneMessages.heavySnow
     }
-    else if (weather.includes("雪")) {
+    else if ( weather.includes("雪") ) {
       return fortuneMessages.snow
     }
-    else if (weather.includes("霧")) {
+    else if ( weather.includes("霧") ) {
       return fortuneMessages.fog
     }
-    else if (weather.includes("雷")) {
+    else if ( weather.includes("雷") ) {
       return fortuneMessages.thunder
     }
     else {
@@ -108,14 +110,15 @@ function WeatherFortune({ weatherData }) {
 
   // 天気の表示タイプを決め、画像パスを取得
   const getWeatherImages = (weather) => {
-    if (weather.includes("のち")) {
+    if ( weather.includes("のち") ) {
       const [firstWeather, secondWeather] = weather.split("のち")
       return {type: "transition",     // 遷移タイプの天気だと示す
               firstImagePath:  getWeatherImagePath(firstWeather),
               secondImagePath: getWeatherImagePath(secondWeather),
-              symbol: "→" }
+              symbol: "→"
+      }
     }
-    else if (weather.includes("を伴う")) {
+    else if ( weather.includes("を伴う") ) {
       // 「で」区切りで最初の部分から主要な天気を抽出
       const mainWeather = extractWeatherKeyword(weather.split("で")[0])
       // 主要な天気の後に続く天気を抽出
@@ -124,11 +127,13 @@ function WeatherFortune({ weatherData }) {
       return {type: "accompanying",  // 伴う
               firstImagePath:  getWeatherImagePath(mainWeather),
               secondImagePath: getWeatherImagePath(accompanyingWeather),
-              symbol: "+" }
+              symbol: "+"
+      }
     }
     else {
       return {type: "single",
-              imagePath: getWeatherImagePath(weather)}
+              imagePath: getWeatherImagePath(weather)
+      }
     }
   }
 
@@ -166,7 +171,7 @@ function WeatherFortune({ weatherData }) {
           {/* 最大温度・最小温度があるなら、表示 */}
           {weatherData.temperature.max && weatherData.temperature.min
             ? ` ${weatherData.temperature.max}℃〜${weatherData.temperature.min}℃`
-            : ""}
+            : "" }
         </div>
 
         <div className="weather-image-container">
@@ -185,16 +190,21 @@ function WeatherFortune({ weatherData }) {
                     className="weather-image combined-image"
                     onError={(e) =>
                       handleImageError(e, weatherImages.secondImagePath) } />
-            </> )
-            : (   // 単一の天気画像や、おみくじの画像（fortune）を使いう
+            </>
+          )
+          : (   // 単一の天気画像や、おみくじの画像（fortune）を使いう
             <img  src={weatherImages.imagePath || fortune.imagePath}
                   alt={fortune.result}
                   className="weather-image"
                   onError={(e) =>
                     handleImageError(
                       e,
-                      weatherImages.imagePath || fortune.imagePath ) } />)
-          }
+                      weatherImages.imagePath || fortune.imagePath
+                    )
+                  }
+            />
+          )
+        }
         </div>
         <span style={{ color: "green" }}>ラッキー度</span>
         <div className="fortune-clovers">{renderClovers(fortune.luck)}</div>

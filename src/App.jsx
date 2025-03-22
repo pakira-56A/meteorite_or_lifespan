@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import "./App.css"
-import WeatherFortune from "./components/WeatherFortune"
 import RouletteWheel from "./components/RouletteWheel"
+import WeatherFortune from "./components/WeatherFortune"
 
 function App() {
   const [isSpinning, setIsSpinning] = useState(false)    // 初期値はルーレットが回転していない
@@ -126,9 +126,9 @@ function App() {
       // 地域に対応する天気コードを検索
       const area = weatherForecast.areas.find((area) => {
         // 各area名がregionNameと一致するか、codeがregionCodeと一致するかをチェック
-        return area.area.name === regionName || area.area.code === regionCode;
-      });
-      const weatherCode = area ? area.weatherCodes[0] : weatherForecast.areas[0].weatherCodes[0];
+        return area.area.name === regionName || area.area.code === regionCode
+      })
+      const weatherCode = area ? area.weatherCodes[0] : weatherForecast.areas[0].weatherCodes[0]
 
       // 天気コードを使って天気テキストを取得
       const weatherText = getWeatherTextFromCode(weatherCode)
@@ -136,13 +136,13 @@ function App() {
       let maxTemp = null
       let minTemp = null
 
-    if (temperatureForecast) {    // 温度予報があるなら
-      const foundArea = temperatureForecast.areas.find((area) => {
-        // 各area名がregionNameと一致するか、codeがregionCodeと一致するかをチェック
-        return area.area.name === regionName || area.area.code === regionCode;
-      });
-      // foundAreaがあればその値を、ない場合は気温予報地域の最初の要素をtempAreaに代入
-      const tempArea = foundArea || temperatureForecast.areas[0];
+      if (temperatureForecast) {    // 温度予報があるなら
+        const foundArea = temperatureForecast.areas.find((area) => {
+          // 各area名がregionNameと一致するか、codeがregionCodeと一致するかをチェック
+          return area.area.name === regionName || area.area.code === regionCode
+        })
+        // foundAreaがあればその値を、ない場合は気温予報地域の最初の要素をtempAreaに代入
+        const tempArea = foundArea || temperatureForecast.areas[0]
 
         if (tempArea.temps) {
           // 気温の最大と最小を取得し、数値に変換してそれぞれに保存
@@ -161,7 +161,8 @@ function App() {
         date:        forecastDate,
         weather:     weatherText,
         weatherCode: weatherCode,
-        temperature: { max: maxTemp, min: minTemp }}
+        temperature: { max: maxTemp, min: minTemp }
+      }
     }
     catch (error) {
       console.error("気象庁APIからのデータ取得エラー:", error)
@@ -291,7 +292,6 @@ function App() {
       427: "みぞれのち雪",
       450: "雪で雷を伴う"
     }
-
     return weatherCodes[code] || "不明" // 引数で受け取ったコードに対応する天気テキストを返す
   }
 

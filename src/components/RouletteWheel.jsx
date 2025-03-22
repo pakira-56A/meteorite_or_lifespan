@@ -46,7 +46,8 @@ function RouletteWheel({ regions, isSpinning, selectedRegion }) {
       <div className="roulette-display" ref={rouletteRef}>
         {displayedRegion}
       </div>
-    </div> )
+    </div>
+  )
 }
 
 export default RouletteWheel
